@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="TIradorDados">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="dados.TIradorDados">
   <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="100" vgap="100">
     <margin top="100" left="100" bottom="100" right="100"/>
     <constraints>
