@@ -23,6 +23,7 @@ public class map {
             FondoPanel_4 fondo = new FondoPanel_4();
             frame.setContentPane(fondo);
 
+
         }
         else{
             ;

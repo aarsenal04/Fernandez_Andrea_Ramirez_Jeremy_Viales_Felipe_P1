@@ -22,23 +22,24 @@ public class set_map {
         };
         //Definicion de imagen de celdas
         JLabel icon = new JLabel(new ImageIcon(getClass().getResource("label.png")));
+        JLabel icon_2 = new JLabel(new ImageIcon(getClass().getResource("label 2.png")));
 
         //Agregar celdas dependiendo del nivel
         if (tamano == 3) {
             tablemodel.addRow(new Object[]{icon, icon, icon});
-            tablemodel.addRow(new Object[]{icon, icon, icon});
+            tablemodel.addRow(new Object[]{icon_2, icon_2, icon_2});
             tablemodel.addRow(new Object[]{icon, icon, icon});
         }
         if (tamano == 4) {
             tablemodel.addRow(new Object[]{icon,icon,icon,icon});
+            tablemodel.addRow(new Object[]{icon_2,icon_2,icon_2,icon_2});
             tablemodel.addRow(new Object[]{icon,icon,icon,icon});
-            tablemodel.addRow(new Object[]{icon,icon,icon,icon});
-            tablemodel.addRow(new Object[]{icon,icon,icon,icon});
+            tablemodel.addRow(new Object[]{icon_2,icon_2,icon_2,icon_2});
         } else {
             tablemodel.addRow(new Object[]{icon,icon,icon,icon,icon});
+            tablemodel.addRow(new Object[]{icon_2,icon_2,icon_2,icon_2,icon_2});
             tablemodel.addRow(new Object[]{icon,icon,icon,icon,icon});
-            tablemodel.addRow(new Object[]{icon,icon,icon,icon,icon});
-            tablemodel.addRow(new Object[]{icon,icon,icon,icon,icon});
+            tablemodel.addRow(new Object[]{icon_2,icon_2,icon_2,icon_2,icon_2});
             tablemodel.addRow(new Object[]{icon,icon,icon,icon,icon});
 
         }

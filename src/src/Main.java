@@ -24,8 +24,8 @@ public class Main {
         /*JPanel as = new JPanel();
         int i = 3;
         map mapa = new map(as,i);*/
-       selecter selec = new selecter();
-       /* int cell_width_3 = 580;
+        selecter selec = new selecter();
+        /*int cell_width_3 = 580;
         int cell_height_3 = 550;
 
         int cell_width_4 = 850;
