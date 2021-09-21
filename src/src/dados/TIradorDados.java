@@ -16,6 +16,7 @@ public class TIradorDados {
             @Override
             // Se genera un action listner para cuando se estripe el boton se ejecute el codigo de los dados
             public void actionPerformed(ActionEvent e) {
+
                 // generar numero de dados con numero aleatoreos
                 int dado1 = (int)(Math.random()*5)*1;
                 // se generaron los iconos de los dados apartir de las imagenes
@@ -34,6 +35,8 @@ public class TIradorDados {
 
                 int resultado = dado1;
                 textField1.setText("Muevete " + resultado + " espacios");
+
+
             }
 
         });
@@ -45,6 +48,15 @@ public class TIradorDados {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        try {
+
+                    Thread.sleep(3000);
+                    System.exit(0);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+
+
     }
 
 
