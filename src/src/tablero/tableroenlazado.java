@@ -64,6 +64,9 @@ public class tableroenlazado {
         int numtt = numreto ; //trampa
 
         String[] tipos = {"reto", "trampa", "tunel"};
+        if (size == 25){
+            numtt++;
+        }
         for (int i = 0; i < size; i++) {
 
             int alazar = (int)(Math.random()*3);

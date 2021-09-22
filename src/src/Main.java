@@ -45,7 +45,7 @@ public class Main {
         int window_height_5 = 950;
 
         interfaz.set_map mapa = new interfaz.set_map(5,cell_width_5,cell_height_5,window_height_5);*/
-        tableroenlazado temp = new tableroenlazado(36);
+        tableroenlazado temp = new tableroenlazado(25);
         temp.generatab();
         temp.imprimir();
     }
