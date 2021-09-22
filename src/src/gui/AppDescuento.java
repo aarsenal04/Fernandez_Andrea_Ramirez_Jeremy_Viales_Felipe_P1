@@ -37,6 +37,8 @@ public class AppDescuento extends JFrame{
 
         JPanel panel = new JPanel();
         map mapa = new map(panel, map);
+        JButton boton = new JButton();
+        panel.add(boton);
 
         setContentPane(VentanaC);
         setSize(width_1,height_1);

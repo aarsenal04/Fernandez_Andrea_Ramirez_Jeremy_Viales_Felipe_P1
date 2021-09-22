@@ -1,7 +1,5 @@
-import gui.selecter;
-import interfaz.map;
-
-import javax.swing.*;
+import dados.TIradorDados;
+import imagenfondo.*;
 
 
 /**
@@ -24,7 +22,16 @@ public class Main {
         /*JPanel as = new JPanel();
         int i = 3;
         map mapa = new map(as,i);*/
-        selecter selec = new selecter();
+        //selecter selec = new selecter();
+        //ImagenFondo fondo = new ImagenFondo();
+        //new Index().setVisible(true);
+        niveles nivel = new niveles();
+        nivel.setnivel(1);
+
+        Index mapa = new Index(nivel.getnivel());
+        mapa.setVisible(true);
+
+
         /*int cell_width_3 = 580;
         int cell_height_3 = 550;
 
