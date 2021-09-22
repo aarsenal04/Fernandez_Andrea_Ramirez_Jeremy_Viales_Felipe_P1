@@ -34,6 +34,7 @@ public class Tirardado {
         int resultado = dado1;
         txtNombre.setText("Muevete " + resultado + " espacios");
         //resultado_dado resultado_dado = new resultado_dado(resultado);
+        System.out.println("Cambio x");
     }
 
 
