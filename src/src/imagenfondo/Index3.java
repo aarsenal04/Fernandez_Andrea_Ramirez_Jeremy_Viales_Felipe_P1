@@ -15,27 +15,12 @@ import javax.swing.JPanel;
 public class Index3 extends javax.swing.JFrame {
     
     FondoPanel fondo = new FondoPanel();
-    FondoPanel_2 fondo2 = new FondoPanel_2();
-    FondoPanel_4 fondo4 = new FondoPanel_4();
+
     
-    public Index3(int nivel) {
+    public Index3(int i) {
 
+        this.setContentPane(fondo);
 
-        if (nivel ==1){
-            this.setContentPane(fondo);
-        }
-        if (nivel ==2){
-            this.setContentPane(fondo2);
-        }
-        if (nivel ==3){
-            this.setContentPane(fondo4);
-        }
-        else{
-            ;
-        }
-        
-
-        
         initComponents(); 
     }
 
@@ -621,8 +606,7 @@ public class Index3 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         //txtNombre.setText("\"hola Diego\"");
-        Tirardado dado = new Tirardado(mostrador, txtNombre);
-               Icon Imagenes1 = new ImageIcon(getClass().getResource("personaje_1.png"));  
+        Tirardado dado = new Tirardado(mostrador, txtNombre);Icon Imagenes1 = new ImageIcon(getClass().getResource("personaje_1.png"));
         Icon Imagenes2 = new ImageIcon(getClass().getResource("personaje_2.png"));  
         P2C1.setIcon(Imagenes2);
         P2C2.setIcon(Imagenes2);
@@ -677,11 +661,6 @@ public class Index3 extends javax.swing.JFrame {
         P1C23.setIcon(Imagenes1);
         P1C24.setIcon(Imagenes1);
         P1C25.setIcon(Imagenes1);
-
-        
-        
-        
-
 
 
     }
@@ -762,33 +741,10 @@ public class Index3 extends javax.swing.JFrame {
         
         @Override
         public void paint(Graphics g) {
-            imagen = new ImageIcon(getClass().getResource("3x3.png")).getImage();
+            imagen = new ImageIcon(getClass().getResource("5x5.png")).getImage();
             g.drawImage(imagen,0, 0, getWidth(), getHeight(),this);
             setOpaque(false);
             super.paint(g);
         }
     }
-    class FondoPanel_2 extends JPanel{
-        private Image imagen;
-
-        public void paint(Graphics g){
-            imagen = new ImageIcon(getClass().getResource("4x4.png")).getImage();
-            g.drawImage(imagen,0,0,getWidth(),getHeight(),this);
-            setOpaque(false);
-            super.paint(g);
-        }
-    }
-
-
-    class FondoPanel_4 extends JPanel{
-        private Image imagen;
-
-        public void paint(Graphics g){
-            imagen = new ImageIcon(getClass().getResource("5x5.png")).getImage();
-            g.drawImage(imagen,0,0,getWidth(),getHeight(),this);
-            setOpaque(false);
-            super.paint(g);
-        }
-    }
-    
 }

@@ -1,8 +1,11 @@
 package sockets;
 
+import tablero.*;
+
 import java.io.*;
 import java.net.Socket;
 import javax.swing.*;
+
 
 /**
 
@@ -29,6 +32,7 @@ public class Cliente implements Runnable{
             e.printStackTrace();
         }
 
+
     }
 
     @Override
@@ -37,9 +41,12 @@ public class Cliente implements Runnable{
         while (true){
             try {
                 String msg = in.readUTF();
-                String valores[] = msg.split("#");
+                //String valores[] = msg.split("#");
+                //lista listaenlazada = new lista();
+                //System.out.println(listaenlazada.get_lista());
 
-                if (valores[0].equals("C")) {
+
+                /*if (valores[0].equals("C")) {
 
                     t.setText(t.getText() + "\n" + "[Server] The value are: " + valores[1] + " " + valores[2] + " " + valores[3]);
 
@@ -54,7 +61,7 @@ public class Cliente implements Runnable{
                 } else {
                     t.setText(t.getText() + "\n" + "[Server] The value is: " + valores[1]);
                     System.out.println(valores[1]);
-                }
+                }*/
             } catch (IOException e) {
                 e.printStackTrace();
 
@@ -73,8 +80,6 @@ public class Cliente implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
 
     }
 }

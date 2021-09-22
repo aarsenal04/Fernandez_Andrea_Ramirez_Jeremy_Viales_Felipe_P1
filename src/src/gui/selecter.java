@@ -43,7 +43,11 @@ public class selecter extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 app.setVisible(false);
                 app.dispose();
-                AppDescuento app = new AppDescuento(0,"Cliente (Jugador 2)",width,height,map);
+                try {
+                    AppDescuento app = new AppDescuento(0,"Cliente (Jugador 2)",width,height,map);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         servidorButton.addActionListener(new ActionListener() {
@@ -51,7 +55,11 @@ public class selecter extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 app.setVisible(false);
                 app.dispose();
-                AppDescuento app = new AppDescuento(1,"Servidor (Jugador 1)",width,height,map);
+                try {
+                    AppDescuento app = new AppDescuento(1,"Servidor (Jugador 1)",width,height,map);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         a3x3Button.addActionListener(new ActionListener() {

@@ -14,27 +14,11 @@ import javax.swing.JPanel;
 public class Index extends javax.swing.JFrame {
     
     FondoPanel fondo = new FondoPanel();
-    FondoPanel_2 fondo2 = new FondoPanel_2();
-    FondoPanel_4 fondo4 = new FondoPanel_4();
+
     
-    public Index(int nivel) {
+    public Index(int i) {
 
-
-        if (nivel ==1){
-            this.setContentPane(fondo);
-        }
-        if (nivel ==2){
-            this.setContentPane(fondo2);
-        }
-        if (nivel ==3){
-            this.setContentPane(fondo4);
-        }
-        else{
-            ;
-        }
-        
-
-        
+        this.setContentPane(fondo);
         initComponents(); 
     }
 
@@ -337,10 +321,6 @@ public class Index extends javax.swing.JFrame {
         P1C7.setIcon(Imagenes1);
         P1C8.setIcon(Imagenes1);
         P1C9.setIcon(Imagenes1);
-        
-
-
-
     }
 
     public static void main() {
@@ -393,27 +373,6 @@ public class Index extends javax.swing.JFrame {
             super.paint(g);
         }
     }
-    class FondoPanel_2 extends JPanel{
-        private Image imagen;
 
-        public void paint(Graphics g){
-            imagen = new ImageIcon(getClass().getResource("4x4.png")).getImage();
-            g.drawImage(imagen,0,0,getWidth(),getHeight(),this);
-            setOpaque(false);
-            super.paint(g);
-        }
-    }
-
-
-    class FondoPanel_4 extends JPanel{
-        private Image imagen;
-
-        public void paint(Graphics g){
-            imagen = new ImageIcon(getClass().getResource("5x5.png")).getImage();
-            g.drawImage(imagen,0,0,getWidth(),getHeight(),this);
-            setOpaque(false);
-            super.paint(g);
-        }
-    }
     
 }

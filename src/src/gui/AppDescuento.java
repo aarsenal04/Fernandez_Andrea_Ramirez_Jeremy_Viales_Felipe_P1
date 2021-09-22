@@ -3,10 +3,10 @@ package gui;
 import imagenfondo.Index;
 import imagenfondo.Index2;
 import imagenfondo.Index3;
-import interfaz.map;
-import interfaz.set_map;
+import imagenfondo.niveles;
 import sockets.Cliente;
 import sockets.Servidor;
+import tablero.tableroenlazado;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -35,10 +35,10 @@ public class AppDescuento extends JFrame{
     private Cliente c;
     private Servidor s;
 
-    public AppDescuento(int i, String title,int width_1, int height_1,int map){
+    public AppDescuento(int i, String title,int width_1, int height_1,int map) throws IOException {
 
 
-        JPanel panel = new JPanel();
+        /*JPanel panel = new JPanel();
         //map mapa = new map(panel, map);
         JButton boton = new JButton();
         panel.add(boton);
@@ -47,31 +47,41 @@ public class AppDescuento extends JFrame{
         setSize(width_1,height_1);
         setTitle(title);
         setVisible(true);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);*/
 
+        niveles nivel = new niveles();
+        nivel.setnivel(i);
 
         if (map ==1){
-            new Index(map).setVisible(true);
+            new Index(i).setVisible(true);
         }
         if (map ==2){
-            new Index2(map).setVisible(true);
+            new Index2(i).setVisible(true);
         }
         if (map ==3){
-            new Index3(map).setVisible(true);
+            new Index3(i).setVisible(true);
         }
         else{
             ;
         }
 
-
         if(i == 0){
             c = new Cliente(textPane1);
             Thread threadCliente = new Thread(c);
             threadCliente.start();
+
+
         }else{
+            tableroenlazado temp = new tableroenlazado(9);
+            temp.generatab();
+            temp.imprimir();
+
+
             s = new Servidor(textPane1);
             Thread threadCliente = new Thread(s);
             threadCliente.start();
+
+
         }
 
 
@@ -82,7 +92,7 @@ public class AppDescuento extends JFrame{
                 String msg = "";
                 msg = "C#" + textField1.getText() + "#" + textField2.getText() + "#" + textField3.getText();
 
-                if(i == 0){
+                if(i == 0){//Cliente
                     textPane1.setText(textPane1.getText() + "\n" + "[Client] The value are: " + textField1.getText() + " " + textField2.getText() + " " + textField3.getText());
                     c.Send(msg);
                 }else{

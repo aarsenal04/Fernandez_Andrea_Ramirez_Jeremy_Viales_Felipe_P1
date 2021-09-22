@@ -23,7 +23,7 @@ public class Main {
         /*JPanel as = new JPanel();
         int i = 3;
         map mapa = new map(as,i);*/
-        //selecter selec = new selecter();
+        selecter selec = new selecter();
         //ImagenFondo fondo = new ImagenFondo();
         //new Index().setVisible(true);
         //niveles nivel = new niveles();
@@ -61,9 +61,9 @@ public class Main {
             ;
         }*/
 
-        tableroenlazado temp = new tableroenlazado(25);
+        /*tableroenlazado temp = new tableroenlazado(25);
         temp.generatab();
-        temp.imprimir();
+        temp.imprimir();*/
     }
 
 }

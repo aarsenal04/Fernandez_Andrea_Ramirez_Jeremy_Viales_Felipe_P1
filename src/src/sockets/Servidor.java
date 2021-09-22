@@ -1,5 +1,7 @@
 package sockets;
 
+import tablero.tableroenlazado;
+
 import java.io.*;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -13,7 +15,7 @@ import javax.swing.*;
 
  */
 
-public class Servidor implements Runnable{
+public class Servidor implements Runnable {
 
     private final int PUERTO = 5000;
 
@@ -24,7 +26,7 @@ public class Servidor implements Runnable{
     public DataInputStream in;
     public JTextPane t;
 
-    public Servidor(JTextPane aText){
+    public Servidor(JTextPane aText) {
 
         t = aText;
 
@@ -52,6 +54,7 @@ public class Servidor implements Runnable{
 
                 this.msg = in.readUTF(); //Lee el dato que recibe
 
+
                 String valores[] = this.msg.split("#");
 
 
@@ -62,8 +65,8 @@ public class Servidor implements Runnable{
                     int valor = Integer.parseInt(valores[1]);
                     int peso = Integer.parseInt(valores[2]);
                     int impuesto = Integer.parseInt(valores[3]);
-                    double monto = (valor*(impuesto/100))+(peso*0.15);
-                    this.Send("M#"+String.valueOf(monto));
+                    double monto = (valor * (impuesto / 100)) + (peso * 0.15);
+                    this.Send("M#" + String.valueOf(monto));
 
                     t.setText(t.getText() + "\n" + "[Server] The value is: " + String.valueOf(monto));
 
@@ -85,5 +88,6 @@ public class Servidor implements Runnable{
         this.out.writeUTF(msg); //Envio datos --> "5#1#6"
 
     }
+
 
 }
