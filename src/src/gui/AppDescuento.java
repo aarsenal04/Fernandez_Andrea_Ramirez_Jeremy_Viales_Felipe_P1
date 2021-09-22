@@ -76,7 +76,6 @@ public class AppDescuento extends JFrame{
             temp.generatab();
             temp.imprimir();
 
-
             s = new Servidor(textPane1);
             Thread threadCliente = new Thread(s);
             threadCliente.start();
