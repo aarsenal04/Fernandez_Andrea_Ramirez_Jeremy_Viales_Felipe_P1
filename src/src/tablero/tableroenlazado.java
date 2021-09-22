@@ -5,11 +5,13 @@ public class tableroenlazado {
     private nodoCasilla primero;
     private nodoCasilla ultimo;
     private int numElem;
+    private int size;
 
-    public tableroenlazado() {
+    public tableroenlazado(int size) {
         this.ultimo = null;
         this.primero = null;
         this.numElem = 0;
+        this.size = size;
     }
     public nodoCasilla getultimo() {
         return ultimo;
@@ -36,7 +38,64 @@ public class tableroenlazado {
     }
     public void insert (String tipo){
 
-        new nodoCasilla()
+        nodoCasilla nodo = new nodoCasilla (numElem, tipo, null, null);
+        if (primero==null){
 
+            primero = nodo;
+            ultimo = nodo;
+
+        }
+
+        else{
+
+            nodoCasilla temp = primero;
+
+            while (temp.getSig()!=null){
+                temp = temp.getSig();
+            }
+            temp.setSig(nodo);
+            nodo.setAnt(temp);
+        }
+        numElem++;
+    }
+    public void generatab(){
+
+        int numreto = size/2;
+        int numtt = numreto ; //trampa
+
+        String[] tipos = {"reto", "trampa", "tunel"};
+        for (int i = 0; i < size; i++) {
+
+            int alazar = (int)(Math.random()*3);
+            if (alazar==0){
+
+                if (numreto!=0){
+                    insert(tipos[alazar]);
+                    numreto--;
+                } else {
+                    i--;
+                }
+            } else {
+                if (numtt!=0){
+                    insert(tipos[alazar]);
+                    numtt--;
+                } else {
+                    i--;
+                }
+            }
+
+        }
+    }
+    public void imprimir(){
+
+        nodoCasilla temp = primero;
+
+        while (temp.getSig()!=null){
+            System.out.println(temp.gettipo());
+            System.out.println(temp.getindex());
+            temp = temp.getSig();
+        }
+        System.out.println(temp.gettipo());
+        System.out.println(temp.getindex());
     }
 }

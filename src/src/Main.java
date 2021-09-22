@@ -1,4 +1,5 @@
 import imagenfondo.*;
+import tablero.tableroenlazado;
 
 
 /**
@@ -24,11 +25,11 @@ public class Main {
         //selecter selec = new selecter();
         //ImagenFondo fondo = new ImagenFondo();
         //new Index().setVisible(true);
-        niveles nivel = new niveles();
-        nivel.setnivel(1);
+        //niveles nivel = new niveles();
+        //nivel.setnivel(1);
 
-        Index mapa = new Index(nivel.getnivel());
-        mapa.setVisible(true);
+        //Index mapa = new Index(nivel.getnivel());
+        //mapa.setVisible(true);
 
 
         /*int cell_width_3 = 580;
@@ -44,26 +45,9 @@ public class Main {
         int window_height_5 = 950;
 
         interfaz.set_map mapa = new interfaz.set_map(5,cell_width_5,cell_height_5,window_height_5);*/
-
+        tableroenlazado temp = new tableroenlazado(36);
+        temp.generatab();
+        temp.imprimir();
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
