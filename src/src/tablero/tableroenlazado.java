@@ -64,10 +64,11 @@ public class tableroenlazado {
         int numtt = numreto ; //trampa
 
         String[] tipos = {"reto", "trampa", "tunel"};
-        if (size == 25){
+        insert("Inicio");
+        if (size == 25 || size == 9){
             numtt++;
         }
-        for (int i = 0; i < size; i++) {
+        for (int i = 1; i < size -1; i++) {
 
             int alazar = (int)(Math.random()*3);
             if (alazar==0){
@@ -88,6 +89,7 @@ public class tableroenlazado {
             }
 
         }
+        insert("Final");
     }
     public void imprimir(){
 

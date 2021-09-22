@@ -1,7 +1,8 @@
-import imagenfondo.*;
+import gui.selecter;
+
 import tablero.tableroenlazado;
 
-
+import imagenfondo.*;
 /**
 
  * Esta clase la que corre la interfaz del programa desde la aparición de una ventana.
@@ -46,7 +47,7 @@ public class Main {
 
         interfaz.set_map mapa = new interfaz.set_map(5,cell_width_5,cell_height_5,window_height_5);*/
 
-        int nivel = 3;
+        /*int nivel = 3;
         if (nivel ==1){
             new Index(nivel).setVisible(true);
         }
@@ -58,7 +59,7 @@ public class Main {
         }
         else{
             ;
-        }
+        }*/
 
         tableroenlazado temp = new tableroenlazado(25);
         temp.generatab();

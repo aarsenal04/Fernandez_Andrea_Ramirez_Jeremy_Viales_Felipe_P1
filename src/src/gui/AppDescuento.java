@@ -1,5 +1,8 @@
 package gui;
 
+import imagenfondo.Index;
+import imagenfondo.Index2;
+import imagenfondo.Index3;
 import interfaz.map;
 import interfaz.set_map;
 import sockets.Cliente;
@@ -36,7 +39,7 @@ public class AppDescuento extends JFrame{
 
 
         JPanel panel = new JPanel();
-        map mapa = new map(panel, map);
+        //map mapa = new map(panel, map);
         JButton boton = new JButton();
         panel.add(boton);
 
@@ -45,6 +48,20 @@ public class AppDescuento extends JFrame{
         setTitle(title);
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+
+        if (map ==1){
+            new Index(map).setVisible(true);
+        }
+        if (map ==2){
+            new Index2(map).setVisible(true);
+        }
+        if (map ==3){
+            new Index3(map).setVisible(true);
+        }
+        else{
+            ;
+        }
 
 
         if(i == 0){
