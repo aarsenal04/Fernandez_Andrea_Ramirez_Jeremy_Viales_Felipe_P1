@@ -25,7 +25,7 @@ public class Main {
         //ImagenFondo fondo = new ImagenFondo();
         //new Index().setVisible(true);
         niveles nivel = new niveles();
-        nivel.setnivel(2);
+        nivel.setnivel(1);
 
         Index mapa = new Index(nivel.getnivel());
         mapa.setVisible(true);
@@ -48,3 +48,22 @@ public class Main {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
