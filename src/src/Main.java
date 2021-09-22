@@ -1,4 +1,3 @@
-import dados.TIradorDados;
 import imagenfondo.*;
 
 
@@ -26,7 +25,7 @@ public class Main {
         //ImagenFondo fondo = new ImagenFondo();
         //new Index().setVisible(true);
         niveles nivel = new niveles();
-        nivel.setnivel(1);
+        nivel.setnivel(2);
 
         Index mapa = new Index(nivel.getnivel());
         mapa.setVisible(true);

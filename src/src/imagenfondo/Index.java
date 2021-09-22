@@ -1,7 +1,7 @@
 
 package imagenfondo;
 
-import dados.TIradorDados;
+
 import dados.Tirardado;
 
 import java.awt.Graphics;

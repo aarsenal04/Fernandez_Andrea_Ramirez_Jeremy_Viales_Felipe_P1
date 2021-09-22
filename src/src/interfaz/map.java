@@ -1,5 +1,5 @@
 package interfaz;
-import dados.TIradorDados;
+
 
 import javax.swing.*;
 import java.awt.*;

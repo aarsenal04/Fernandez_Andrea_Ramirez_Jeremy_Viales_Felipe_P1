@@ -1,18 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package dados;
 
 import javax.swing.Icon;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-/**
- *
- * @author febel
- */
+
 public class Tirardado {
     public Tirardado(JLabel mostrador, JTextField txtNombre){
         // generar numero de dados con numero aleatoreos
@@ -34,7 +27,6 @@ public class Tirardado {
         int resultado = dado1;
         txtNombre.setText("Muevete " + resultado + " espacios");
         //resultado_dado resultado_dado = new resultado_dado(resultado);
-        System.out.println("Cambio x");
     }
 
 
