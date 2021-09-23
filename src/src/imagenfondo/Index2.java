@@ -17,7 +17,7 @@ public class Index2 extends javax.swing.JFrame {
     FondoPanel fondo = new FondoPanel();
 
     
-    public Index2(int i) {
+    public Index2() {
 
         this.setContentPane(fondo);
         
@@ -515,7 +515,7 @@ public class Index2 extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 niveles nivel = new niveles();
-                new Index2(nivel.getnivel()).setVisible(true);
+                new Index2().setVisible(true);
             }
         });
     }

@@ -2,28 +2,60 @@
 package imagenfondo;
 
 import dados.Tirardado;
+import sockets.Cliente;
+import sockets.Servidor;
+import tablero.tableroenlazado;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import javax.swing.Icon;
-
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
+import java.io.IOException;
+import javax.swing.*;
 
 
 public class Index extends javax.swing.JFrame {
-    
+    private Cliente c;
+    private Servidor s;
+    private int in;
+    private int posicion;
+    private int map;
+
     FondoPanel fondo = new FondoPanel();
 
-    
-    public Index(int i) {
+    public Index(int i, int map) {
+        this.map = map;
+        in = i;
 
         this.setContentPane(fondo);
+
+        tableroenlazado temp = new tableroenlazado(9);
+        temp.generatab();
+        temp.imprimir();
+
+
+
+        Mensajero mensajero = new Mensajero();
+
+        if(i == 0){
+
+            c = new Cliente(mensajero);
+            Thread threadCliente = new Thread(c);
+            threadCliente.start();
+        }else {
+
+
+            s = new Servidor(mensajero);
+            Thread threadCliente = new Thread(s);
+            threadCliente.start();
+        }
+
+
         initComponents(); 
     }
 
+    public Index() {
 
-    
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,7 +107,11 @@ public class Index extends javax.swing.JFrame {
         jButton1.setText("Tirar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                try {
+                    jButton1ActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -120,9 +156,9 @@ public class Index extends javax.swing.JFrame {
                 .addGap(40, 40, 40))
         );
 
-        P1C1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenfondo/label.jpg"))); // NOI18N
+        P1C1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenfondo/personaje_1.png"))); // NOI18N
 
-        P2C1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenfondo/label.jpg"))); // NOI18N
+        P2C1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenfondo/personaje_2.png"))); // NOI18N
 
         P1C2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenfondo/label.jpg"))); // NOI18N
 
@@ -278,7 +314,7 @@ public class Index extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         Icon Imagenes = new ImageIcon(getClass().getResource("label.jpg"));  
-        P2C1.setIcon(Imagenes);
+        /*P2C1.setIcon(Imagenes);
         P2C2.setIcon(Imagenes);
         P2C3.setIcon(Imagenes);
         P2C4.setIcon(Imagenes);
@@ -295,15 +331,19 @@ public class Index extends javax.swing.JFrame {
         P1C6.setIcon(Imagenes);
         P1C7.setIcon(Imagenes);
         P1C8.setIcon(Imagenes);
-        P1C9.setIcon(Imagenes);
+        P1C9.setIcon(Imagenes);*/
+        if(in == 1){
+            System.out.println("Soy el servidor ");
+        }
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
         //txtNombre.setText("\"hola Diego\"");
         Tirardado dado = new Tirardado(mostrador, txtNombre);
         Icon Imagenes1 = new ImageIcon(getClass().getResource("personaje_1.png"));  
         Icon Imagenes2 = new ImageIcon(getClass().getResource("personaje_2.png"));  
-        P2C1.setIcon(Imagenes2);
+        /*P2C1.setIcon(Imagenes2);
         P2C2.setIcon(Imagenes2);
         P2C3.setIcon(Imagenes2);
         P2C4.setIcon(Imagenes2);
@@ -320,7 +360,13 @@ public class Index extends javax.swing.JFrame {
         P1C6.setIcon(Imagenes1);
         P1C7.setIcon(Imagenes1);
         P1C8.setIcon(Imagenes1);
-        P1C9.setIcon(Imagenes1);
+        P1C9.setIcon(Imagenes1);*/
+        if(in == 1){
+            s.Send(txtNombre.getText());
+        }
+        else{
+            c.Send(txtNombre.getText());
+        }
     }
 
     public static void main() {
@@ -329,7 +375,7 @@ public class Index extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 niveles nivel = new niveles();
-                new Index(nivel.getnivel()).setVisible(true);
+                new Index(nivel.get_i(),nivel.getnivel()).setVisible(true);
             }
         });
     }
@@ -359,8 +405,6 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JLabel mostrador;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
-
-
 
     class FondoPanel extends JPanel {
         private Image imagen;

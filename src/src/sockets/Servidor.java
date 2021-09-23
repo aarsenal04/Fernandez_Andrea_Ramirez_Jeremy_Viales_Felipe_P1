@@ -1,6 +1,7 @@
 package sockets;
 
-import tablero.tableroenlazado;
+import imagenfondo.Index;
+import imagenfondo.Mensajero;
 
 import java.io.*;
 import java.io.DataOutputStream;
@@ -15,7 +16,7 @@ import javax.swing.*;
 
  */
 
-public class Servidor implements Runnable {
+public class Servidor extends Index implements Runnable {
 
     private final int PUERTO = 5000;
 
@@ -25,10 +26,14 @@ public class Servidor implements Runnable {
     public DataOutputStream out;
     public DataInputStream in;
     public JTextPane t;
+    private Mensajero mensajero;
 
-    public Servidor(JTextPane aText) {
+    public Servidor(Mensajero mensajero) {
+        super();
+        this.mensajero = mensajero;
 
-        t = aText;
+        //JTextPane aText = new JTextPane();
+        //t = aText;
 
         try {
             ss = new ServerSocket(this.PUERTO); //Crea el server socket
@@ -40,9 +45,24 @@ public class Servidor implements Runnable {
             out = new DataOutputStream(this.socket.getOutputStream()); //Para enviar datos
             in = new DataInputStream(this.socket.getInputStream()); // Para recibir datos
 
+            /*if (map ==1){
+                new Index().setVisible(true);
+            }
+            if (map ==2){
+                new Index2().setVisible(true);
+            }
+            if (map ==3){
+                new Index3().setVisible(true);
+            }
+            else{
+                ;
+            }*/
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
     }
 
@@ -54,11 +74,14 @@ public class Servidor implements Runnable {
 
                 this.msg = in.readUTF(); //Lee el dato que recibe
 
+                System.out.println(msg);
 
-                String valores[] = this.msg.split("#");
+                int dado = Integer.parseInt(msg);
+
+                mensajero.setNumber(dado);
 
 
-                if (valores[0].equals("C")) {
+                /*if (valores[0].equals("C")) {
 
                     t.setText(t.getText() + "\n" + "[Client] The value are: " + valores[1] + " " + valores[2] + " " + valores[3]);
 
@@ -73,7 +96,7 @@ public class Servidor implements Runnable {
                 } else {
                     t.setText(t.getText() + "\n" + "[Client] The value is: " + valores[1]);
                     System.out.println(valores[1]);
-                }
+                }*/
 
             }
 

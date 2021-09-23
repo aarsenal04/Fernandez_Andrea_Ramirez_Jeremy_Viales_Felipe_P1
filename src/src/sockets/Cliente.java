@@ -1,5 +1,9 @@
 package sockets;
 
+import imagenfondo.Index;
+import imagenfondo.Index2;
+import imagenfondo.Index3;
+import imagenfondo.Mensajero;
 import tablero.*;
 
 import java.io.*;
@@ -21,13 +25,31 @@ public class Cliente implements Runnable{
     private int puerto = 5000;
     private String host = "localhost";
     private JTextPane t;
+    private Mensajero mensajero;
 
-    public Cliente(JTextPane aText){
-        t = aText;
+    public Cliente(/*JTextPane aText*/Mensajero mensajero){
+        //t = aText;
         try {
             this.cliente = new Socket(this.host,this.puerto); //Creo el cliente
             this.in = new DataInputStream(cliente.getInputStream()); //objeto para recibir datos
             this.out = new DataOutputStream(cliente.getOutputStream()); //objeto para enviar
+
+            this.mensajero = mensajero;
+
+            /*if (map ==1){
+                //new Index().setVisible(true);
+                Index mapa = new Index();
+                mapa.setVisible(true);
+            }
+            if (map ==2){
+                new Index2().setVisible(true);
+            }
+            if (map ==3){
+                new Index3().setVisible(true);
+            }
+            else{
+                ;
+            }*/
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -36,15 +58,21 @@ public class Cliente implements Runnable{
     }
 
     @Override
-    public void run() {
+    public void run(){
 
         while (true){
             try {
                 String msg = in.readUTF();
+
+                System.out.println(msg);
+
+                int dado = Integer.parseInt(msg);
+
+                mensajero.setNumber(dado);
+
                 //String valores[] = msg.split("#");
                 //lista listaenlazada = new lista();
                 //System.out.println(listaenlazada.get_lista());
-
 
                 /*if (valores[0].equals("C")) {
 
@@ -66,13 +94,12 @@ public class Cliente implements Runnable{
                 e.printStackTrace();
 
             }
-
         }
-
     }
 
-    public void Send(String msg){
 
+
+    public void Send(String msg){
         try {
 
             this.out.writeUTF(msg); //Envio datos --> "5#1#6"

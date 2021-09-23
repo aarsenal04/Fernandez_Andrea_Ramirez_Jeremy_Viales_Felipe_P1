@@ -1,12 +1,9 @@
 package gui;
 
 import imagenfondo.Index;
-import imagenfondo.Index2;
-import imagenfondo.Index3;
 import imagenfondo.niveles;
 import sockets.Cliente;
 import sockets.Servidor;
-import tablero.tableroenlazado;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -50,23 +47,24 @@ public class AppDescuento extends JFrame{
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);*/
 
         niveles nivel = new niveles();
-        nivel.setnivel(i);
+        nivel.setnivel(map);
+        nivel.set_i(i);
 
         if (map ==1){
-            new Index(i).setVisible(true);
+            new Index(i,map).setVisible(true);
         }
-        if (map ==2){
+        /*if (map ==2){
             new Index2(i).setVisible(true);
         }
         if (map ==3){
             new Index3(i).setVisible(true);
-        }
+        }*/
         else{
             ;
         }
 
-        if(i == 0){
-            c = new Cliente(textPane1);
+        /*if(i == 0){
+            c = new Cliente(map);
             Thread threadCliente = new Thread(c);
             threadCliente.start();
 
@@ -76,15 +74,15 @@ public class AppDescuento extends JFrame{
             temp.generatab();
             temp.imprimir();
 
-            s = new Servidor(textPane1);
+            s = new Servidor(map);
             Thread threadCliente = new Thread(s);
             threadCliente.start();
 
 
-        }
+        }*/
 
 
-        enviarButton.addActionListener(new ActionListener() {
+        /*enviarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -96,14 +94,14 @@ public class AppDescuento extends JFrame{
                     c.Send(msg);
                 }else{
                     try {
-                        s.Send(msg);
+                        s.Send(msg, P1C1);
                         textPane1.setText(textPane1.getText() + "\n" + "[Server] The value are: " + textField1.getText() + " " + textField2.getText() + " " + textField3.getText());
                     } catch (IOException ioException) {
                         ioException.printStackTrace();
                     }
                 }
             }
-        });
+        });*/
     }
 
 

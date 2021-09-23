@@ -36,6 +36,7 @@ public class tableroenlazado {
     public void setNumElem(int numElem) {
         numElem = numElem;
     }
+
     public void insert (String tipo){
 
         nodoCasilla nodo = new nodoCasilla (numElem, tipo, null, null);
@@ -43,13 +44,9 @@ public class tableroenlazado {
 
             primero = nodo;
             ultimo = nodo;
-
         }
-
         else{
-
             nodoCasilla temp = primero;
-
             while (temp.getSig()!=null){
                 temp = temp.getSig();
             }

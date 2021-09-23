@@ -17,7 +17,7 @@ public class Index3 extends javax.swing.JFrame {
     FondoPanel fondo = new FondoPanel();
 
     
-    public Index3(int i) {
+    public Index3() {
 
         this.setContentPane(fondo);
 
@@ -671,7 +671,7 @@ public class Index3 extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 niveles nivel = new niveles();
-                new Index3(nivel.getnivel()).setVisible(true);
+                new Index3().setVisible(true);
             }
         });
     }

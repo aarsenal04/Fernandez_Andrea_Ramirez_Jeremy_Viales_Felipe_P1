@@ -25,7 +25,7 @@ public class Tirardado {
         }
 
         int resultado = dado1;
-        txtNombre.setText("Muevete " + resultado + " espacios");
+        txtNombre.setText(String.valueOf(resultado));
         //resultado_dado resultado_dado = new resultado_dado(resultado);
     }
 
