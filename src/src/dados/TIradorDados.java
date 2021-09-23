@@ -25,7 +25,7 @@ public class TIradorDados {
                 Icon tres = new javax.swing.ImageIcon(getClass().getResource("/dados/tres.png"));
                 Icon cuatro = new javax.swing.ImageIcon(getClass().getResource("/dados/cuatro.png"));
 
-                // muestra los dados al jugador
+                // muestra los dados al tablero.jugador
                 switch (dado1){
                     case 1: mostrador.setIcon(uno); break;
                     case 2: mostrador.setIcon(dos); break;

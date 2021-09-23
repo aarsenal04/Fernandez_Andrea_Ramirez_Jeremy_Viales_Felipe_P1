@@ -100,4 +100,37 @@ public class tableroenlazado {
         System.out.println(temp.gettipo());
         System.out.println(temp.getindex());
     }
+
+    public void moverjugador(jugador player, int dado){
+
+        int i = 0;
+        nodoCasilla temp = primero;
+
+        while (i!=player.getposition() + dado && i!=size){
+
+            primero = primero.getSig();
+        }
+
+        if (i != size){
+
+            player.setposition(i);
+
+        }
+        else{
+            //gana el jugador
+        }
+    }
+    public String obtenerTipo(jugador player){
+
+        int i = player.getposition();
+        nodoCasilla temp = primero;
+
+        for (int j = 0; j != i; j++) {
+
+            temp = temp.getSig();
+
+        }
+        return temp.gettipo();
+    }
+
 }

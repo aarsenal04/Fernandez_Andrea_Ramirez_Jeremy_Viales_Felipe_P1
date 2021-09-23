@@ -15,10 +15,6 @@ public class Ventana_retos extends javax.swing.JFrame {
      */
     public Ventana_retos() {
 
-
-
-
-
         initComponents();
         }
 
