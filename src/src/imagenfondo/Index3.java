@@ -1,31 +1,54 @@
 
 package imagenfondo;
 
-import dados.TIradorDados;
 import dados.Tirardado;
-
+import loops.game_loop_3_P1;
+import loops.game_loop_3_P2;
+import sockets.Cliente;
+import sockets.Servidor;
 import java.awt.Graphics;
 import java.awt.Image;
-import javax.swing.Icon;
-
+import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 
 public class Index3 extends javax.swing.JFrame {
-    
-    FondoPanel fondo = new FondoPanel();
-
-    
-    public Index3() {
-
+    private Cliente c;
+    private Servidor s;
+    private int in;
+    private int posicion;
+    public Index3(int i) {
+        FondoPanel fondo = new FondoPanel();
+        in = i;
+        this.posicion = 0;
         this.setContentPane(fondo);
 
-        initComponents(); 
+        /*tableroenlazado temp = new tableroenlazado(9);
+        temp.generatab();
+        temp.imprimir();*/
+
+        if (i == 0) {
+            c = new Cliente();
+            Thread threadCliente = new Thread(c);
+            threadCliente.start();
+        } else {
+            s = new Servidor();
+            Thread threadCliente = new Thread(s);
+            threadCliente.start();
+        }
+        if (in == 1) {
+            Thread t = new Thread(new Hilo_M3());
+            t.start();
+        }
+        if (in == 0) {
+            Thread t = new Thread(new Hilo_M3());
+            t.start();
+        }
+
+        initComponents();
     }
 
-
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -104,7 +127,11 @@ public class Index3 extends javax.swing.JFrame {
         jButton1.setText("Tirar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                try {
+                    jButton1ActionPerformed(evt);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -120,36 +147,36 @@ public class Index3 extends javax.swing.JFrame {
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtNombre)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(mostrador)))
-                .addContainerGap(38, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(105, 105, 105)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap(43, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtNombre)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(15, 15, 15)
+                                                .addComponent(mostrador)))
+                                .addContainerGap(38, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(105, 105, 105)
+                                .addComponent(jButton2)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(mostrador)
-                .addGap(40, 40, 40))
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(81, 81, 81)
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(mostrador)
+                                .addGap(40, 40, 40))
         );
 
-        P1C1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenfondo/label.jpg"))); // NOI18N
+        P1C1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenfondo/personaje_1.png"))); // NOI18N
 
         P1C2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenfondo/label.jpg"))); // NOI18N
 
@@ -159,7 +186,7 @@ public class Index3 extends javax.swing.JFrame {
 
         P1C5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenfondo/label.jpg"))); // NOI18N
 
-        P2C1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenfondo/label.jpg"))); // NOI18N
+        P2C1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenfondo/personaje_2.png"))); // NOI18N
 
         P2C3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenfondo/label.jpg"))); // NOI18N
 
@@ -252,296 +279,296 @@ public class Index3 extends javax.swing.JFrame {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(P2C5)
-                        .addGap(68, 68, 68))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(55, 55, 55)
-                                        .addComponent(P2C21))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(P1C1)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(P2C1)))
-                                .addGap(44, 44, 44)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(P1C2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(P2C2)
-                                        .addGap(71, 71, 71)
-                                        .addComponent(P1C3))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(P1C9)
-                                        .addGap(132, 132, 132))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(P1C22, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(P1C12))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(P2C22)
-                                                .addGap(72, 72, 72)
-                                                .addComponent(P1C23, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(P2C12)
-                                                .addGap(65, 65, 65)
-                                                .addComponent(P1C13))))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(P1C11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(P2C11))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(P1C20, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(P2C20)))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(P2C5)
+                                                .addGap(68, 68, 68))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addGap(55, 55, 55)
+                                                                                .addComponent(P2C21))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addComponent(P1C1)
+                                                                                .addGap(18, 18, 18)
+                                                                                .addComponent(P2C1)))
+                                                                .addGap(44, 44, 44)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addComponent(P1C2)
+                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                                .addComponent(P2C2)
+                                                                                .addGap(71, 71, 71)
+                                                                                .addComponent(P1C3))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addComponent(P1C9)
+                                                                                .addGap(132, 132, 132))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                                        .addComponent(P1C22, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                        .addComponent(P1C12))
+                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                                                                .addComponent(P2C22)
+                                                                                                .addGap(72, 72, 72)
+                                                                                                .addComponent(P1C23, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                                                                .addComponent(P2C12)
+                                                                                                .addGap(65, 65, 65)
+                                                                                                .addComponent(P1C13))))))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(4, 4, 4)
+                                                                .addComponent(P1C11)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(P2C11))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(28, 28, 28)
+                                                                .addComponent(P1C20, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(P2C20)))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(P2C13)
+                                                                        .addComponent(P1C8))
+                                                                .addGap(61, 61, 61))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addGap(12, 12, 12)
+                                                                                .addComponent(P2C3))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                                .addComponent(P2C23))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                                .addComponent(P1C18)
+                                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                                                .addComponent(P2C18)))
+                                                                .addGap(35, 35, 35)))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(P1C24, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(P2C24))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(9, 9, 9)
+                                                                .addComponent(P1C4)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(P2C4))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(40, 40, 40)
+                                                                .addComponent(P1C7))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(P1C14)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(P2C14))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(14, 14, 14)
+                                                                .addComponent(P1C17)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(P2C17)))
+                                                .addGap(26, 26, 26)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                                                .addComponent(P1C5)
+                                                                                .addGap(119, 119, 119))
+                                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                                                .addComponent(P1C15)
+                                                                                .addGap(99, 99, 99))
+                                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                                                .addComponent(P1C16)
+                                                                                .addGap(18, 18, 18)
+                                                                                .addComponent(P2C16)
+                                                                                .addGap(23, 23, 23))))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(5, 5, 5)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addComponent(P1C25, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addGap(18, 18, 18)
+                                                                                .addComponent(P2C25))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addGap(51, 51, 51)
+                                                                                .addComponent(P1C6)))
+                                                                .addGap(0, 0, Short.MAX_VALUE))))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(P1C19)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(P2C19))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(59, 59, 59)
+                                                                .addComponent(P1C10)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                                .addComponent(P2C10)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(P2C9)))
+                                                .addGap(123, 123, 123)
+                                                .addComponent(P2C8)
+                                                .addGap(99, 99, 99)
+                                                .addComponent(P2C7)
+                                                .addGap(115, 115, 115)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(P2C15)
+                                                        .addComponent(P2C6))
+                                                .addGap(43, 43, 43))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(P2C13)
-                                    .addComponent(P1C8))
-                                .addGap(61, 61, 61))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
-                                        .addComponent(P2C3))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(P2C23))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(P1C18)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(P2C18)))
-                                .addGap(35, 35, 35)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(P1C24, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(P2C24))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(P1C4)
-                                .addGap(18, 18, 18)
-                                .addComponent(P2C4))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(P1C7))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(P1C14)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(P2C14))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(P1C17)
-                                .addGap(18, 18, 18)
-                                .addComponent(P2C17)))
-                        .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(P1C5)
-                                        .addGap(119, 119, 119))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(P1C15)
-                                        .addGap(99, 99, 99))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(P1C16)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(P2C16)
-                                        .addGap(23, 23, 23))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(P1C25, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(P2C25))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(51, 51, 51)
-                                        .addComponent(P1C6)))
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(P1C19)
-                                .addGap(18, 18, 18)
-                                .addComponent(P2C19))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(59, 59, 59)
-                                .addComponent(P1C10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(P2C10)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(P2C9)))
-                        .addGap(123, 123, 123)
-                        .addComponent(P2C8)
-                        .addGap(99, 99, 99)
-                        .addComponent(P2C7)
-                        .addGap(115, 115, 115)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(P2C15)
-                            .addComponent(P2C6))
-                        .addGap(43, 43, 43))))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(354, 354, 354)
-                    .addComponent(P1C21, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(767, Short.MAX_VALUE)))
+                                .addGroup(layout.createSequentialGroup()
+                                        .addGap(354, 354, 354)
+                                        .addComponent(P1C21, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addContainerGap(767, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(P1C1)
-                            .addComponent(P1C2)
-                            .addComponent(P1C3)
-                            .addComponent(P1C5))
-                        .addGap(99, 99, 99))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(67, 67, 67)
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(P2C1)
-                                    .addComponent(P2C2)
-                                    .addComponent(P2C3)
-                                    .addComponent(P2C4)
-                                    .addComponent(P2C5)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(P1C4)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(P1C8)
-                                .addComponent(P1C6, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addComponent(P1C7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(P2C7)
-                            .addComponent(P2C6)
-                            .addComponent(P2C8)
-                            .addComponent(P2C9)
-                            .addComponent(P2C10)))
-                    .addComponent(P1C9)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(P1C10)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(49, 49, 49)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(37, 37, 37)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(P1C1)
+                                                        .addComponent(P1C2)
+                                                        .addComponent(P1C3)
+                                                        .addComponent(P1C5))
+                                                .addGap(99, 99, 99))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                                .addGap(67, 67, 67)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                        .addComponent(P2C1)
+                                                                        .addComponent(P2C2)
+                                                                        .addComponent(P2C3)
+                                                                        .addComponent(P2C4)
+                                                                        .addComponent(P2C5)))
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                                .addGap(27, 27, 27)
+                                                                .addComponent(P1C4)))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(P1C15)
-                                    .addComponent(P1C14)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(60, 60, 60)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addComponent(P1C8)
+                                                                .addComponent(P1C6, javax.swing.GroupLayout.Alignment.TRAILING))
+                                                        .addComponent(P1C7))
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(P2C7)
+                                                        .addComponent(P2C6)
+                                                        .addComponent(P2C8)
+                                                        .addComponent(P2C9)
+                                                        .addComponent(P2C10)))
+                                        .addComponent(P1C9)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(9, 9, 9)
+                                                .addComponent(P1C10)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(P2C15)
-                                        .addGap(28, 28, 28))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(P2C14)
-                                            .addComponent(P2C13))
-                                        .addGap(19, 19, 19))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(P1C12)
-                                        .addGap(51, 51, 51))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(P1C13)
-                                        .addGap(41, 41, 41))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(70, 70, 70)
-                                .addComponent(P1C11))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(83, 83, 83)
-                                .addComponent(P2C11)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(P2C18)
-                                    .addComponent(P2C16)
-                                    .addComponent(P2C19)
-                                    .addComponent(P2C20)
-                                    .addComponent(P2C17))
-                                .addGap(39, 39, 39))
-                            .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                                .addGap(49, 49, 49)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(P1C15)
+                                                                        .addComponent(P1C14)))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(60, 60, 60)
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addComponent(P2C15)
+                                                                                .addGap(28, 28, 28))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                                        .addComponent(P2C14)
+                                                                                        .addComponent(P2C13))
+                                                                                .addGap(19, 19, 19))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addComponent(P1C12)
+                                                                                .addGap(51, 51, 51))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addComponent(P1C13)
+                                                                                .addGap(41, 41, 41))))
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                                .addGap(70, 70, 70)
+                                                                .addComponent(P1C11))
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                                .addGap(83, 83, 83)
+                                                                .addComponent(P2C11)))
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                        .addComponent(P2C18)
+                                                                        .addComponent(P2C16)
+                                                                        .addComponent(P2C19)
+                                                                        .addComponent(P2C20)
+                                                                        .addComponent(P2C17))
+                                                                .addGap(39, 39, 39))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addGap(51, 51, 51)
+                                                                                .addComponent(P1C20))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addGap(51, 51, 51)
+                                                                                .addComponent(P1C18))
+                                                                        .addGroup(layout.createSequentialGroup()
+                                                                                .addGap(57, 57, 57)
+                                                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                                                        .addComponent(P1C17)
+                                                                                        .addComponent(P1C16))))
+                                                                .addGap(54, 54, 54))))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addGap(92, 92, 92)
+                                                .addComponent(P2C12)
+                                                .addGap(70, 70, 70)
+                                                .addComponent(P1C19)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(51, 51, 51)
-                                        .addComponent(P1C20))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(51, 51, 51)
-                                        .addComponent(P1C18))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(57, 57, 57)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(P1C17)
-                                            .addComponent(P1C16))))
-                                .addGap(54, 54, 54))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(P2C12)
-                        .addGap(70, 70, 70)
-                        .addComponent(P1C19)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(P1C23, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(P1C22, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(P1C24, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(P1C25, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(P2C24)
-                                .addComponent(P2C23))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(P2C25)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(P2C21)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
-                        .addComponent(P2C22)
-                        .addGap(114, 114, 114))))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(631, Short.MAX_VALUE)
-                    .addComponent(P1C21)
-                    .addGap(158, 158, 158)))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(46, 46, 46)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(P1C23, javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(P1C22, javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(P1C24, javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(P1C25, javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                                .addComponent(P2C24)
+                                                                .addComponent(P2C23))
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                                .addGap(16, 16, 16)
+                                                                .addComponent(P2C25)))
+                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(79, 79, 79)
+                                                .addComponent(P2C21)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                                                .addComponent(P2C22)
+                                                .addGap(114, 114, 114))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addContainerGap(631, Short.MAX_VALUE)
+                                        .addComponent(P1C21)
+                                        .addGap(158, 158, 158)))
         );
 
         pack();
@@ -549,120 +576,26 @@ public class Index3 extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Icon Imagenes = new ImageIcon(getClass().getResource("label.jpg"));
-        P2C1.setIcon(Imagenes);
-        P2C2.setIcon(Imagenes);
-        P2C3.setIcon(Imagenes);
-        P2C4.setIcon(Imagenes);
-        P2C5.setIcon(Imagenes);
-        P2C6.setIcon(Imagenes);
-        P2C7.setIcon(Imagenes);
-        P2C8.setIcon(Imagenes);
-        P2C9.setIcon(Imagenes);
-        P2C10.setIcon(Imagenes);
-        P2C11.setIcon(Imagenes);
-        P2C12.setIcon(Imagenes);
-        P2C13.setIcon(Imagenes);
-        P2C14.setIcon(Imagenes);
-        P2C15.setIcon(Imagenes);
-        P2C16.setIcon(Imagenes);
-        P2C17.setIcon(Imagenes);
-        P2C18.setIcon(Imagenes);
-        P2C19.setIcon(Imagenes);
-        P2C20.setIcon(Imagenes);
-        P2C21.setIcon(Imagenes);
-        P2C22.setIcon(Imagenes);
-        P2C23.setIcon(Imagenes);
-        P2C24.setIcon(Imagenes);
-        P2C25.setIcon(Imagenes);
-
-        P1C1.setIcon(Imagenes);
-        P1C2.setIcon(Imagenes);
-        P1C3.setIcon(Imagenes);
-        P1C4.setIcon(Imagenes);
-        P1C5.setIcon(Imagenes);
-        P1C6.setIcon(Imagenes);
-        P1C7.setIcon(Imagenes);
-        P1C8.setIcon(Imagenes);
-        P1C9.setIcon(Imagenes);
-        P1C10.setIcon(Imagenes);
-        P1C11.setIcon(Imagenes);
-        P1C12.setIcon(Imagenes);
-        P1C13.setIcon(Imagenes);
-        P1C14.setIcon(Imagenes);
-        P1C15.setIcon(Imagenes);
-        P1C16.setIcon(Imagenes);
-        P1C17.setIcon(Imagenes);
-        P1C18.setIcon(Imagenes);
-        P1C19.setIcon(Imagenes);
-        P1C20.setIcon(Imagenes);
-        P1C21.setIcon(Imagenes);
-        P1C22.setIcon(Imagenes);
-        P1C23.setIcon(Imagenes);
-        P1C24.setIcon(Imagenes);
-        P1C25.setIcon(Imagenes);
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        //txtNombre.setText("\"hola Diego\"");
-        Tirardado dado = new Tirardado(mostrador, txtNombre);Icon Imagenes1 = new ImageIcon(getClass().getResource("personaje_1.png"));
-        Icon Imagenes2 = new ImageIcon(getClass().getResource("personaje_2.png"));  
-        P2C1.setIcon(Imagenes2);
-        P2C2.setIcon(Imagenes2);
-        P2C3.setIcon(Imagenes2);
-        P2C4.setIcon(Imagenes2);
-        P2C5.setIcon(Imagenes2);
-        P2C6.setIcon(Imagenes2);
-        P2C7.setIcon(Imagenes2);
-        P2C8.setIcon(Imagenes2);
-        P2C9.setIcon(Imagenes2);
-        P2C10.setIcon(Imagenes2);
-        P2C11.setIcon(Imagenes2);
-        P2C12.setIcon(Imagenes2);
-        P2C13.setIcon(Imagenes2);
-        P2C14.setIcon(Imagenes2);
-        P2C15.setIcon(Imagenes2);
-        P2C16.setIcon(Imagenes2);
-        P2C17.setIcon(Imagenes2);
-        P2C18.setIcon(Imagenes2);
-        P2C19.setIcon(Imagenes2);
-        P2C20.setIcon(Imagenes2);
-        P2C21.setIcon(Imagenes2);
-        P2C22.setIcon(Imagenes2);
-        P2C23.setIcon(Imagenes2);
-        P2C24.setIcon(Imagenes2);
-        P2C25.setIcon(Imagenes2);
-        
-        
-        
-        P1C1.setIcon(Imagenes1);
-        P1C2.setIcon(Imagenes1);
-        P1C3.setIcon(Imagenes1);
-        P1C4.setIcon(Imagenes1);
-        P1C5.setIcon(Imagenes1);
-        P1C6.setIcon(Imagenes1);
-        P1C7.setIcon(Imagenes1);
-        P1C8.setIcon(Imagenes1);
-        P1C9.setIcon(Imagenes1);
-        P1C10.setIcon(Imagenes1);        
-        P1C11.setIcon(Imagenes1);
-        P1C12.setIcon(Imagenes1);
-        P1C13.setIcon(Imagenes1);
-        P1C14.setIcon(Imagenes1);
-        P1C15.setIcon(Imagenes1);
-        P1C16.setIcon(Imagenes1);  
-        P1C17.setIcon(Imagenes1);
-        P1C18.setIcon(Imagenes1);
-        P1C19.setIcon(Imagenes1);
-        P1C20.setIcon(Imagenes1);
-        P1C21.setIcon(Imagenes1);
-        P1C22.setIcon(Imagenes1);
-        P1C23.setIcon(Imagenes1);
-        P1C24.setIcon(Imagenes1);
-        P1C25.setIcon(Imagenes1);
+    Mensajero mensajero = Mensajero.getInstance();
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
+        Tirardado dado = new Tirardado(mostrador, txtNombre);
+        String num_dado_str = txtNombre.getText();
+        int num_dado_int = Integer.parseInt(num_dado_str);
+        this.posicion += num_dado_int;
+        String pos_ = Integer.toString(posicion);
 
+        if (in == 1) {
+            s.Send(pos_);
+            game_loop_3_P1 loop = new game_loop_3_P1(posicion,P1C1,P1C2,P1C3,P1C4,P1C5,P1C6,P1C7,P1C8,P1C9,P1C10,P1C11,P1C12,P1C13,P1C14,P1C15,P1C16,P1C17,P1C18,P1C19,P1C20,P1C21,P1C22,P1C23,P1C24,P1C25);
+
+        }
+        if (in == 0) {
+            c.Send(pos_);
+            game_loop_3_P2 loop = new game_loop_3_P2(posicion,P2C1,P2C2,P2C3,P2C4,P2C5,P2C6,P2C7,P2C8,P2C9,P2C10,P2C11,P2C12,P2C13,P2C14,P2C15,P2C16,P2C17,P2C18,P2C19,P2C20,P2C21,P2C22,P2C23,P2C24,P2C25);
+        }
     }
 
     public static void main() {
@@ -671,7 +604,7 @@ public class Index3 extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 niveles nivel = new niveles();
-                new Index3().setVisible(true);
+                new Index3(nivel.get_i()).setVisible(true);
             }
         });
     }
@@ -735,16 +668,33 @@ public class Index3 extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 
-
     class FondoPanel extends JPanel {
         private Image imagen;
-        
+
         @Override
         public void paint(Graphics g) {
             imagen = new ImageIcon(getClass().getResource("5x5.png")).getImage();
-            g.drawImage(imagen,0, 0, getWidth(), getHeight(),this);
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
             setOpaque(false);
             super.paint(g);
+        }
+    }
+    class Hilo_M3 implements Runnable {
+        public void run() {
+
+            if (in == 1) {
+                while (true) {
+                    int posicion_otro_a = mensajero.getNumber();
+                    game_loop_3_P2 loop_otro = new game_loop_3_P2(posicion_otro_a,P2C1,P2C2,P2C3,P2C4,P2C5,P2C6,P2C7,P2C8,P2C9,P2C10,P2C11,P2C12,P2C13,P2C14,P2C15,P2C16,P2C17,P2C18,P2C19,P2C20,P2C21,P2C22,P2C23,P2C24,P2C25);
+                }
+            }
+            if (in == 0) {
+                while (true) {
+                    int posicion_otro_b = mensajero.getNumber();
+                    game_loop_3_P1 loop_otro = new game_loop_3_P1(posicion_otro_b,P1C1,P1C2,P1C3,P1C4,P1C5,P1C6,P1C7,P1C8,P1C9,P1C10,P1C11,P1C12,P1C13,P1C14,P1C15,P1C16,P1C17,P1C18,P1C19,P1C20,P1C21,P1C22,P1C23,P1C24,P1C25);
+
+                }
+            }
         }
     }
 }

@@ -25,39 +25,19 @@ public class Servidor extends Index implements Runnable {
     public Socket socket;
     public DataOutputStream out;
     public DataInputStream in;
-    public JTextPane t;
-    private Mensajero mensajero;
 
-    public Servidor(Mensajero mensajero) {
-        super();
-        this.mensajero = mensajero;
-
-        //JTextPane aText = new JTextPane();
-        //t = aText;
-
+    public Servidor() {
         try {
             ss = new ServerSocket(this.PUERTO); //Crea el server socket
             System.out.println("Esperando a que el cliente se conecte");
 
             this.socket = ss.accept(); //Espera a que un ÚNICO CLIENTE se conecte
+
             System.out.println("cliente conectado");
 
             out = new DataOutputStream(this.socket.getOutputStream()); //Para enviar datos
+
             in = new DataInputStream(this.socket.getInputStream()); // Para recibir datos
-
-            /*if (map ==1){
-                new Index().setVisible(true);
-            }
-            if (map ==2){
-                new Index2().setVisible(true);
-            }
-            if (map ==3){
-                new Index3().setVisible(true);
-            }
-            else{
-                ;
-            }*/
-
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -69,34 +49,17 @@ public class Servidor extends Index implements Runnable {
     @Override
     public void run() { // C/M#PESO#Valor#impuesto
         try {
+            Mensajero mensajero = Mensajero.getInstance();
 
             while (true) {
 
                 this.msg = in.readUTF(); //Lee el dato que recibe
 
-                System.out.println(msg);
-
                 int dado = Integer.parseInt(msg);
 
                 mensajero.setNumber(dado);
 
-
-                /*if (valores[0].equals("C")) {
-
-                    t.setText(t.getText() + "\n" + "[Client] The value are: " + valores[1] + " " + valores[2] + " " + valores[3]);
-
-                    int valor = Integer.parseInt(valores[1]);
-                    int peso = Integer.parseInt(valores[2]);
-                    int impuesto = Integer.parseInt(valores[3]);
-                    double monto = (valor * (impuesto / 100)) + (peso * 0.15);
-                    this.Send("M#" + String.valueOf(monto));
-
-                    t.setText(t.getText() + "\n" + "[Server] The value is: " + String.valueOf(monto));
-
-                } else {
-                    t.setText(t.getText() + "\n" + "[Client] The value is: " + valores[1]);
-                    System.out.println(valores[1]);
-                }*/
+                System.out.println("La posicion del cliente es " + dado);
 
             }
 
@@ -107,8 +70,13 @@ public class Servidor extends Index implements Runnable {
     }
 
     public void Send(String msg) throws IOException {
+        try {
 
-        this.out.writeUTF(msg); //Envio datos --> "5#1#6"
+            this.out.writeUTF(msg); //Envio datos --> "5#1#6"
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

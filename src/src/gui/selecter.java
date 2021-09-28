@@ -1,5 +1,7 @@
 package gui;
 
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.TypeHost;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -23,11 +25,10 @@ public class selecter extends JFrame{
     private JButton a5x5Button;
     private JButton a3x3Button;
     private JButton a4x4Button;
-    private int width = 700;
-    private int height = 700;
-    private int map = 1;
+    private int map;
 
     public selecter() {
+        this.map = 1;
 
         JFrame app = new JFrame("Selección");
 
@@ -44,7 +45,7 @@ public class selecter extends JFrame{
                 app.setVisible(false);
                 app.dispose();
                 try {
-                    AppDescuento app = new AppDescuento(0,"Cliente (Jugador 2)",width,height,map);
+                    AppDescuento app = new AppDescuento(0,"(Jugador 2)",map);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -56,7 +57,7 @@ public class selecter extends JFrame{
                 app.setVisible(false);
                 app.dispose();
                 try {
-                    AppDescuento app = new AppDescuento(1,"Servidor (Jugador 1)",width,height,map);
+                    AppDescuento app = new AppDescuento(1,"(Jugador 1)",map);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -65,24 +66,18 @@ public class selecter extends JFrame{
         a3x3Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                width = 700;
-                height = 700;
                 map = 1;
             }
         });
         a4x4Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                width = 800;
-                height = 800;
                 map = 2;
             }
         });
         a5x5Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                width = 900;
-                height = 900;
                 map = 3;
             }
         });
