@@ -333,7 +333,6 @@ public class Index extends javax.swing.JFrame {
 
 
         if (in == 1) {
-            /// this.posicion---> 3----
 
             String pos_ = Integer.toString(posicion);
             s.Send(pos_);
