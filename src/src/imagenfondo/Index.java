@@ -20,14 +20,14 @@ public class Index extends javax.swing.JFrame {
     private int posicion;
 
     public Index(int i) {
-        FondoPanel fondo = new FondoPanel();
+        FondoPanel1 fondo = new FondoPanel1();
         in = i;
         this.posicion = 0;
         this.setContentPane(fondo);
 
-        /*tableroenlazado temp = new tableroenlazado(9);
+        tableroenlazado temp = new tableroenlazado(9);
         temp.generatab();
-        temp.imprimir();*/
+        temp.imprimir();
 
         if (i == 0) {
             c = new Cliente();
@@ -38,14 +38,14 @@ public class Index extends javax.swing.JFrame {
             Thread threadCliente = new Thread(s);
             threadCliente.start();
         }
-        if (in == 1) {
+        /*if (in == 1) {
             Thread t = new Thread(new Hilo_M1());
             t.start();
         }
         if (in == 0) {
             Thread t = new Thread(new Hilo_M1());
             t.start();
-        }
+        }*/
         initComponents();
     }
 
@@ -309,12 +309,19 @@ public class Index extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-
         if (in == 1) {
-            System.out.println("Soy el servidor ");
+            int posicion_otro_a = mensajero.getNumber();
+            game_loop_1_P2 loop_otro = new game_loop_1_P2(posicion_otro_a, P2C1, P2C2, P2C3, P2C4, P2C5, P2C6, P2C7, P2C8, P2C9);
         }
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+        if (in == 0) {
+            int posicion_otro_b = mensajero.getNumber();
+            game_loop_1_P1 loop_otro = new game_loop_1_P1(posicion_otro_b, P1C1, P1C2, P1C3, P1C4, P1C5, P1C6, P1C7, P1C8, P1C9);
+
+        }
+    }
+
+    //GEN-LAST:event_jButton2ActionPerformed
 
     Mensajero mensajero = Mensajero.getInstance();
 
@@ -323,16 +330,22 @@ public class Index extends javax.swing.JFrame {
         String num_dado_str = txtNombre.getText();
         int num_dado_int = Integer.parseInt(num_dado_str);
         this.posicion += num_dado_int;
-        String pos_ = Integer.toString(posicion);
+
 
         if (in == 1) {
+            /// this.posicion---> 3----
+
+            String pos_ = Integer.toString(posicion);
             s.Send(pos_);
-            game_loop_1_P1 loop = new game_loop_1_P1(posicion, P1C1, P1C2, P1C3, P1C4, P1C5, P1C6, P1C7, P1C8, P1C9);
+            game_loop_1_P1 loop = new game_loop_1_P1(posicion,P1C1,P1C2,P1C3,P1C4,P1C5,P1C6,P1C7,P1C8,P1C9);
+
+
 
         }
         if (in == 0) {
+            String pos_ = Integer.toString(posicion);
             c.Send(pos_);
-            game_loop_1_P2 loop = new game_loop_1_P2(posicion, P2C1, P2C2, P2C3, P2C4, P2C5, P2C6, P2C7, P2C8, P2C9);
+            game_loop_1_P2 loop = new game_loop_1_P2(posicion, P2C1,P2C2,P2C3,P2C4,P2C5,P2C6,P2C7,P2C8,P2C9);
         }
     }
 
@@ -370,10 +383,10 @@ public class Index extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel mostrador;
-    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombre;}
     // End of variables declaration//GEN-END:variables
 
-    class FondoPanel extends JPanel {
+    class FondoPanel1 extends JPanel {
         private Image imagen;
 
         @Override
@@ -385,24 +398,24 @@ public class Index extends javax.swing.JFrame {
         }
     }
 
-    class Hilo_M1 implements Runnable {
+    /*class Hilo_M1 implements Runnable {
         public void run() {
 
             if (in == 1) {
                 while (true) {
                     int posicion_otro_a = mensajero.getNumber();
-                    game_loop_1_P2 loop_otro = new game_loop_1_P2(posicion_otro_a, P2C1, P2C2, P2C3, P2C4, P2C5, P2C6, P2C7, P2C8, P2C9);
+                    game_loop_1_P2 loop_otro = new game_loop_1_P2(posicion_otro_a,P2C1,P2C2,P2C3,P2C4,P2C5,P2C6,P2C7,P2C8,P2C9);
                 }
 
             }
             if (in == 0) {
                 while (true) {
                     int posicion_otro_b = mensajero.getNumber();
-                    game_loop_1_P1 loop_otro = new game_loop_1_P1(posicion_otro_b, P1C1, P1C2, P1C3, P1C4, P1C5, P1C6, P1C7, P1C8, P1C9);
+                    game_loop_1_P1 loop_otro = new game_loop_1_P1(posicion_otro_b,P1C1,P1C2,P1C3,P1C4,P1C5,P1C6,P1C7,P1C8,P1C9);
 
                 }
             }
         }
-    }
-}
+    }*/
+
 

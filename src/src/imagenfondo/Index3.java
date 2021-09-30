@@ -37,14 +37,14 @@ public class Index3 extends javax.swing.JFrame {
             Thread threadCliente = new Thread(s);
             threadCliente.start();
         }
-        if (in == 1) {
+        /*if (in == 1) {
             Thread t = new Thread(new Hilo_M3());
             t.start();
         }
         if (in == 0) {
             Thread t = new Thread(new Hilo_M3());
             t.start();
-        }
+        }*/
 
         initComponents();
     }
@@ -576,6 +576,14 @@ public class Index3 extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        if (in == 1) {
+            int posicion_otro_a = mensajero.getNumber();
+            game_loop_3_P2 loop_otro = new game_loop_3_P2(posicion_otro_a, P2C1, P2C2, P2C3, P2C4, P2C5, P2C6, P2C7, P2C8, P2C9, P2C10, P2C11, P2C12, P2C13, P2C14, P2C15, P2C16, P2C17, P2C18, P2C19, P2C20, P2C21, P2C22, P2C23, P2C24, P2C25);
+        }
+        if (in == 0) {
+            int posicion_otro_b = mensajero.getNumber();
+            game_loop_3_P1 loop_otro = new game_loop_3_P1(posicion_otro_b, P1C1, P1C2, P1C3, P1C4, P1C5, P1C6, P1C7, P1C8, P1C9, P1C10, P1C11, P1C12, P1C13, P1C14, P1C15, P1C16, P1C17, P1C18, P1C19, P1C20, P1C21, P1C22, P1C23, P1C24, P1C25);
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     Mensajero mensajero = Mensajero.getInstance();
@@ -679,7 +687,7 @@ public class Index3 extends javax.swing.JFrame {
             super.paint(g);
         }
     }
-    class Hilo_M3 implements Runnable {
+    /*class Hilo_M3 implements Runnable {
         public void run() {
 
             if (in == 1) {
@@ -696,5 +704,5 @@ public class Index3 extends javax.swing.JFrame {
                 }
             }
         }
-    }
+    }*/
 }

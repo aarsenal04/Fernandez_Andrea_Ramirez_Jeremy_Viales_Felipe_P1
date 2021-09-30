@@ -41,14 +41,14 @@ public class Index2 extends javax.swing.JFrame {
             Thread threadCliente = new Thread(s);
             threadCliente.start();
         }
-        if (in == 1) {
+        /*if (in == 1) {
             Thread t = new Thread(new Hilo_M2());
             t.start();
         }
         if (in == 0) {
             Thread t = new Thread(new Hilo_M2());
             t.start();
-        }
+        }*/
         initComponents();
     }
 
@@ -457,7 +457,15 @@ public class Index2 extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
 
+        if (in == 1) {
+            int posicion_otro_a = mensajero.getNumber();
+            game_loop_2_P2 loop_otro = new game_loop_2_P2(posicion_otro_a, P2C1, P2C2, P2C3, P2C4, P2C5, P2C6, P2C7, P2C8, P2C9, P2C10, P2C11, P2C12, P2C13, P2C14, P2C15);
+        }
+        if (in == 0) {
+            int posicion_otro_b = mensajero.getNumber();
+            game_loop_2_P1 loop_otro = new game_loop_2_P1(posicion_otro_b, P1C1, P1C2, P1C3, P1C4, P1C5, P1C6, P1C7, P1C8, P1C9, P1C10, P1C11, P1C12, P1C13, P1C14, P1C15);
 
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
@@ -530,7 +538,7 @@ public class Index2 extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel mostrador;
-    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombre;}
     // End of variables declaration//GEN-END:variables
 
 
@@ -546,7 +554,7 @@ public class Index2 extends javax.swing.JFrame {
         }
     }
 
-    class Hilo_M2 implements Runnable {
+    /*class Hilo_M2 implements Runnable {
         public void run() {
 
             if (in == 1) {
@@ -564,5 +572,5 @@ public class Index2 extends javax.swing.JFrame {
                 }
             }
         }
-    }
-}
+    }*/
+

@@ -45,7 +45,7 @@ public class selecter extends JFrame{
                 app.setVisible(false);
                 app.dispose();
                 try {
-                    AppDescuento app = new AppDescuento(0,"(Jugador 2)",map);
+                    puente app = new puente(0,"(Jugador 2)",map);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
@@ -57,7 +57,7 @@ public class selecter extends JFrame{
                 app.setVisible(false);
                 app.dispose();
                 try {
-                    AppDescuento app = new AppDescuento(1,"(Jugador 1)",map);
+                    puente app = new puente(1,"(Jugador 1)",map);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
