@@ -14,7 +14,7 @@ public class Ventana_retos extends javax.swing.JFrame {
      * Creates new form Ventana_retos
      */
     public Ventana_retos() {
-        System.out.println("Felipe sobon");
+
         initComponents();
     }
 

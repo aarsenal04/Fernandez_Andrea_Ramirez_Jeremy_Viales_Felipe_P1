@@ -6,6 +6,8 @@ import loops.game_loop_1_P1;
 import loops.game_loop_1_P2;
 import sockets.Cliente;
 import sockets.Servidor;
+import tablero.Ventana_Reto;
+import tablero.nodoCasilla;
 import tablero.tableroenlazado;
 
 import java.awt.Graphics;
@@ -320,6 +322,41 @@ public class Index extends javax.swing.JFrame {
 
         }
     }
+    /////////////////////
+    public static boolean posreto(int posjugador){
+
+        nodoCasilla temp = tableroenlazado.primero;
+        int[] listaretos = new int[36];
+        int i = 0;
+        while (temp.getSig()!=null){
+            if (temp.gettipo() == "reto"){
+                listaretos[i] = temp.getindex();
+
+
+            }
+            temp = temp.getSig();
+            i++;
+
+        }
+        int k = 0;
+
+        while (k < listaretos.length){
+
+            if (listaretos[k] != 0){
+                if (posjugador == listaretos[k]){
+                    return true;
+
+                }
+            }
+
+
+            k++;
+
+        }
+
+        return false;
+    }
+
 
     //GEN-LAST:event_jButton2ActionPerformed
 
@@ -333,6 +370,20 @@ public class Index extends javax.swing.JFrame {
 
 
         if (in == 1) {
+            System.out.println("juador 1");
+            boolean x = posreto(this.posicion);
+            System.out.println(x);
+            if (x){
+                System.out.println("ventana reto");
+
+                Ventana_Reto ventanareto = new Ventana_Reto();
+                ventanareto.setVisible(true);
+                boolean i = ventanareto.getcorrecto();
+                System.out.println(i);
+
+
+
+            }
 
             String pos_ = Integer.toString(posicion);
             s.Send(pos_);
@@ -342,6 +393,18 @@ public class Index extends javax.swing.JFrame {
 
         }
         if (in == 0) {
+            System.out.println("juador 2 servidor");
+
+            boolean x = posreto(this.posicion);
+            System.out.println(x);
+
+            if (x){
+                System.out.println("ventana reto");
+
+                Ventana_Reto ventanareto = new Ventana_Reto();
+                ventanareto.setVisible(true);
+
+            }
             String pos_ = Integer.toString(posicion);
             c.Send(pos_);
             game_loop_1_P2 loop = new game_loop_1_P2(posicion, P2C1,P2C2,P2C3,P2C4,P2C5,P2C6,P2C7,P2C8,P2C9);
