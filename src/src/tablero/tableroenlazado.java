@@ -2,7 +2,8 @@ package tablero;
 
 public class tableroenlazado {
 
-    private nodoCasilla primero;
+
+    public static nodoCasilla primero;
     private nodoCasilla ultimo;
     private int numElem;
     private int size;
@@ -93,12 +94,11 @@ public class tableroenlazado {
         nodoCasilla temp = primero;
 
         while (temp.getSig()!=null){
-            System.out.println(temp.gettipo());
-            System.out.println(temp.getindex());
+
+            System.out.println("La posicion " + temp.getindex() + " es un " + temp.gettipo());
             temp = temp.getSig();
         }
-        System.out.println(temp.gettipo());
-        System.out.println(temp.getindex());
+        System.out.println("La posicion " + temp.getindex() + " es un " + temp.gettipo());
     }
 
     public void moverjugador(jugador player, int dado){
@@ -114,10 +114,16 @@ public class tableroenlazado {
         if (i != size){
 
             player.setposition(i);
+            boolean x = posreto(player.getposition());
+            if (x){
+
+            }
+
+
 
         }
         else{
-            //gana el jugador
+
         }
     }
     public String obtenerTipo(jugador player){
@@ -132,5 +138,68 @@ public class tableroenlazado {
         }
         return temp.gettipo();
     }
+//////////////////////
+    public static boolean posreto(int posjugador){
 
+        nodoCasilla temp = primero;
+        int[] listaretos = new int[36];
+        int i = 0;
+        while (temp.getSig()!=null){
+            if (temp.gettipo() == "reto"){
+                listaretos[i] = temp.getindex();
+
+
+            }
+            temp = temp.getSig();
+            i++;
+
+        }
+        int k = 0;
+
+        while (k < listaretos.length){
+
+            if (listaretos[k] != 0){
+                if (posjugador == listaretos[k]){
+                    return true;
+
+                }
+            }
+
+            System.out.println(listaretos[k]);
+            k++;
+
+        }
+
+    return false;
+    }
+
+    public String reto(){
+        String retofinal = "";
+        int reto = (int)(Math.random()*4);
+        int a = (int)(Math.random()*50);
+        int b = (int)(Math.random()*50);
+        System.out.println(reto);
+        if (reto == 0){
+            String a_str = Integer.toString(a);
+            String b_str = Integer.toString(b);
+            retofinal = (a_str + " + " + b_str );
+
+        }else if (reto == 1){
+            String a_str = Integer.toString(a);
+            String b_str = Integer.toString(b);
+            retofinal = (a_str + " - " + b_str );
+
+        }else if (reto == 2){
+            String a_str = Integer.toString(a);
+            String b_str = Integer.toString(b);
+            retofinal = (a_str+" x "+b_str);
+
+        }else {
+            String a_str = Integer.toString(a);
+            String b_str = Integer.toString(b);
+            retofinal = (a_str + " / " + b_str);
+        }
+        return retofinal;
+
+    }
 }
