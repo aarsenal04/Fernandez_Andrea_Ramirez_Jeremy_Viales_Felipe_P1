@@ -8,6 +8,10 @@ import loops.game_loop_2_P1;
 import loops.game_loop_2_P2;
 import sockets.Cliente;
 import sockets.Servidor;
+import tablero.Ventana_Reto;
+import tablero.nodoCasilla;
+import tablero.tableroenlazado;
+
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
@@ -468,7 +472,39 @@ public class Index2 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    public static boolean posreto(int posjugador){
 
+        nodoCasilla temp = tableroenlazado.primero;
+        int[] listaretos = new int[36];
+        int i = 0;
+        while (temp.getSig()!=null){
+            if (temp.gettipo() == "reto"){
+                listaretos[i] = temp.getindex();
+
+
+            }
+            temp = temp.getSig();
+            i++;
+
+        }
+        int k = 0;
+
+        while (k < listaretos.length){
+
+            if (listaretos[k] != 0){
+                if (posjugador == listaretos[k]){
+                    return true;
+
+                }
+            }
+
+
+            k++;
+
+        }
+
+        return false;
+    }
     Mensajero mensajero = Mensajero.getInstance();
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws IOException {
@@ -476,14 +512,36 @@ public class Index2 extends javax.swing.JFrame {
         String num_dado_str = txtNombre.getText();
         int num_dado_int = Integer.parseInt(num_dado_str);
         this.posicion += num_dado_int;
-        String pos_ = Integer.toString(posicion);
+
 
         if (in == 1) {
+            boolean x = posreto(this.posicion);
+            System.out.println(x);
+
+            if (x){
+                System.out.println("ventana reto");
+
+                Ventana_Reto ventanareto = new Ventana_Reto();
+                ventanareto.setVisible(true);
+
+            }
+            String pos_ = Integer.toString(posicion);
             s.Send(pos_);
             game_loop_2_P1 loop = new game_loop_2_P1(posicion, P1C1, P1C2, P1C3, P1C4, P1C5, P1C6, P1C7, P1C8, P1C9, P1C10, P1C11, P1C12, P1C13, P1C14, P1C15);
 
         }
         if (in == 0) {
+            boolean x = posreto(this.posicion);
+            System.out.println(x);
+
+            if (x){
+                System.out.println("ventana reto");
+
+                Ventana_Reto ventanareto = new Ventana_Reto();
+                ventanareto.setVisible(true);
+
+            }
+            String pos_ = Integer.toString(posicion);
             c.Send(pos_);
             game_loop_2_P2 loop = new game_loop_2_P2(posicion, P2C1, P2C2, P2C3, P2C4, P2C5, P2C6, P2C7, P2C8, P2C9, P2C10, P2C11, P2C12, P2C13, P2C14, P2C15);
         }

@@ -378,8 +378,8 @@ public class Index extends javax.swing.JFrame {
 
                 Ventana_Reto ventanareto = new Ventana_Reto();
                 ventanareto.setVisible(true);
-                boolean i = ventanareto.getcorrecto();
-                System.out.println(i);
+               // boolean i = ventanareto.getcorrecto();
+                //System.out.println(i);
 
 
 
