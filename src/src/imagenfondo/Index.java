@@ -20,6 +20,8 @@ public class Index extends javax.swing.JFrame {
     private Servidor s;
     private int in;
     private int posicion;
+    Ventana_Reto ventanareto;
+    boolean respondiendo;
 
     public Index(int i) {
         FondoPanel1 fondo = new FondoPanel1();
@@ -376,13 +378,11 @@ public class Index extends javax.swing.JFrame {
             if (x){
                 System.out.println("ventana reto");
 
-                Ventana_Reto ventanareto = new Ventana_Reto();
-                ventanareto.setVisible(true);
-               // boolean i = ventanareto.getcorrecto();
-                //System.out.println(i);
 
-
-
+                this.ventanareto = new Ventana_Reto();
+                this.ventanareto.setVisible(true);
+                
+                this.respondiendo = true;
             }
 
             String pos_ = Integer.toString(posicion);
@@ -401,9 +401,10 @@ public class Index extends javax.swing.JFrame {
             if (x){
                 System.out.println("ventana reto");
 
-                Ventana_Reto ventanareto = new Ventana_Reto();
-                ventanareto.setVisible(true);
+                this.ventanareto = new Ventana_Reto();
+                this.ventanareto.setVisible(true);
 
+                this.respondiendo = true;
             }
             String pos_ = Integer.toString(posicion);
             c.Send(pos_);

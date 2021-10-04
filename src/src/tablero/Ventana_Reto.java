@@ -5,6 +5,7 @@ package tablero;/*
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  *
@@ -15,18 +16,26 @@ public class Ventana_Reto extends javax.swing.JFrame {
     public int a = (int)(Math.random()*50);
     public int b = (int)(Math.random()*50);
     public int result = 0;
+    public boolean respondio = false;
+    public boolean acerto;
     //private   boolean correcto iogh[];
     /**
      * Creates new form Ventana_Reto
      */
     public Ventana_Reto() {
-     
-        
+
         initComponents();
 
         int tempresult = generaroperacion(a,b,reto);
         result += tempresult;
         System.out.println(result);
+
+    }
+
+    public void waiting(){
+        while (!respondio){
+
+        }
     }
 
 
@@ -38,6 +47,7 @@ public class Ventana_Reto extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -75,22 +85,8 @@ public class Ventana_Reto extends javax.swing.JFrame {
 
         jButton1.setText("Enviar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-                jPanel1.setVisible(false);
-                String respuesta = jTextField1.getText();
-                int respuestaInt = Integer.parseInt(respuesta);
-                if (respuestaInt  == result){
-                    System.out.println("primer logro en tu puta vida");
-                    jPanel1.setVisible(false);
-                } else{
-                    jPanel1.setVisible(false);
-                    System.out.println("sigue siendo un maldito fracasado");
-                }
-                jPanel1.setVisible(false);
-
-
-            }
+            public void actionPerformed(ActionEvent evt) {
+                jButton1ActionPerformed(evt); }
         });
         System.out.println();
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -122,6 +118,7 @@ public class Ventana_Reto extends javax.swing.JFrame {
         );
 
         pack();
+
     }// </editor-fold>//GEN-END:initComponents
 
    // public boolean getcorrecto() {
@@ -169,12 +166,34 @@ public class Ventana_Reto extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String texto = jTextField1.getText();
-        int respu = Integer.parseInt(texto);
-        /*if (respu == result){
-            correcto = true;
+        String respuesta = jTextField1.getText();
+        int respuestaInt = Integer.parseInt(respuesta);
+        if (respuestaInt  == result){
 
-        }*/
+            acerto = true;
+            respondio = true;
+            // qué procede? esperar a que te diga como hacerle update
+            // dice que eso lo hizo jeremy putabida, digale que en vez de retroceder quitarle mejor 1 al dado.
+            jPanel1.disable();
+            jPanel1.setVisible(false);
+
+            JComponent comp = (JComponent) evt.getSource();
+            Window win = SwingUtilities.getWindowAncestor(comp);
+            win.dispose();
+
+        } else{
+
+            acerto = false;
+            respondio = true;
+
+            jPanel1.disable();
+            jPanel1.setVisible(false);
+
+            JComponent comp = (JComponent) evt.getSource();
+            Window win = SwingUtilities.getWindowAncestor(comp);
+            win.dispose();
+        }
+        return;
 
 
 

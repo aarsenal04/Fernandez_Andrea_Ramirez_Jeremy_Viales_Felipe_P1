@@ -22,11 +22,17 @@ public class Index3 extends javax.swing.JFrame {
     private Servidor s;
     private int in;
     private int posicion;
+    Ventana_Reto ventanareto;
+    boolean respondiendo;
+
     public Index3(int i) {
         FondoPanel fondo = new FondoPanel();
         in = i;
         this.posicion = 0;
+
         this.setContentPane(fondo);
+
+
 
         /*tableroenlazado temp = new tableroenlazado(9);
         temp.generatab();
@@ -630,16 +636,29 @@ public class Index3 extends javax.swing.JFrame {
         int num_dado_int = Integer.parseInt(num_dado_str);
         this.posicion += num_dado_int;
 
+        if(this.respondiendo) {
+            if(ventanareto.acerto){
+                System.out.println("acerto");
+            }else{
+                System.out.println("falló");
+            }
+            this.respondiendo = false;
+            this.posicion += 1;
+        }
+
 
         if (in == 1) {
             boolean x = posreto(this.posicion);
             System.out.println(x);
 
-            if (x){
+            if (x) {
                 System.out.println("ventana reto");
 
-                Ventana_Reto ventanareto = new Ventana_Reto();
-                ventanareto.setVisible(true);
+
+                this.ventanareto = new Ventana_Reto();
+                this.ventanareto.setVisible(true);
+
+                this.respondiendo = true;
 
             }
             String pos_ = Integer.toString(posicion);
@@ -654,8 +673,12 @@ public class Index3 extends javax.swing.JFrame {
             if (x){
                 System.out.println("ventana reto");
 
-                Ventana_Reto ventanareto = new Ventana_Reto();
-                ventanareto.setVisible(true);
+
+                this.ventanareto = new Ventana_Reto();
+                this.ventanareto.setVisible(true);
+
+                this.respondiendo = true;
+
 
             }
             String pos_ = Integer.toString(posicion);
