@@ -7,10 +7,10 @@ public class nodoCasilla {
     private nodoCasilla siguiente;
     private nodoCasilla anterior;
 
-    public nodoCasilla(int index, String tipo, nodoCasilla siguiente, nodoCasilla anterior) {
+    public nodoCasilla(int index, String tipo, nodoCasilla siguiente, nodoCasilla anterior) { //nodo casilla es el nodo de la lista enlazada en la casilla
 
-        this.index = index;
-        this.tipo = tipo;
+        this.index = index; //
+        this.tipo = tipo; //tipo reto, trampa o tunel
         this.siguiente = siguiente;
         this.anterior = anterior;
 
@@ -28,7 +28,7 @@ public class nodoCasilla {
         return siguiente;
     }
 
-    public nodoCasilla getAnt() {
+    public nodoCasilla getAnterior() {
         return anterior;
     }
 
