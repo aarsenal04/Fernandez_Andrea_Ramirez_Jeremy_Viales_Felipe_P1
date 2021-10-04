@@ -3,6 +3,9 @@ package tablero;/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  *
  * @author Felipe
@@ -74,9 +77,22 @@ public class Ventana_Reto extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+                jPanel1.setVisible(false);
+                String respuesta = jTextField1.getText();
+                int respuestaInt = Integer.parseInt(respuesta);
+                if (respuestaInt  == result){
+                    System.out.println("primer logro en tu puta vida");
+                    jPanel1.setVisible(false);
+                } else{
+                    jPanel1.setVisible(false);
+                    System.out.println("sigue siendo un maldito fracasado");
+                }
+                jPanel1.setVisible(false);
+
+
             }
         });
-
+        System.out.println();
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

@@ -370,7 +370,7 @@ public class Index extends javax.swing.JFrame {
 
 
         if (in == 1) {
-            System.out.println("juador 1");
+            System.out.println("jugador 1");
             boolean x = posreto(this.posicion);
             System.out.println(x);
             if (x){
@@ -393,7 +393,7 @@ public class Index extends javax.swing.JFrame {
 
         }
         if (in == 0) {
-            System.out.println("juador 2 servidor");
+            System.out.println("jugador 2 servidor");
 
             boolean x = posreto(this.posicion);
             System.out.println(x);
