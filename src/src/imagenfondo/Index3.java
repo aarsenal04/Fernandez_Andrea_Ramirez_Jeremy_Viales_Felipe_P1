@@ -636,6 +636,15 @@ public class Index3 extends javax.swing.JFrame {
         int num_dado_int = Integer.parseInt(num_dado_str);
         this.posicion += num_dado_int;
 
+
+        if(this.respondiendo) {
+            this.respondiendo = false;
+            this.ventanareto = null;
+            this.posicion += 1;
+
+        }
+
+
         if(this.respondiendo) {
             if(ventanareto.acerto){
                 System.out.println("acerto");

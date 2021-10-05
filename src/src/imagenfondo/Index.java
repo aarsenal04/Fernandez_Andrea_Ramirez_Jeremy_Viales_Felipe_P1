@@ -371,6 +371,14 @@ public class Index extends javax.swing.JFrame {
         this.posicion += num_dado_int;
 
 
+        if(this.respondiendo) {
+            this.respondiendo = false;
+            this.ventanareto = null;
+            this.posicion += 1;
+
+        }
+
+
         if (in == 1) {
             System.out.println("jugador 1");
             boolean x = posreto(this.posicion);
