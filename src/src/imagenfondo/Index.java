@@ -381,7 +381,7 @@ public class Index extends javax.swing.JFrame {
 
                 this.ventanareto = new Ventana_Reto();
                 this.ventanareto.setVisible(true);
-                
+
                 this.respondiendo = true;
             }
 
